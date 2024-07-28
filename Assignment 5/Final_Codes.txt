@@ -1,0 +1,335 @@
+1. Write a program to load a .csv file as a NumPy 1-D array. Find the maximum and minimum
+elements in the array.
+Soln:
+
+import numpy as np
+
+# Read the lines from the CSV file
+with open('book1.csv', 'r') as f:
+    lines = f.readlines()
+
+# Process each line to extract numbers after the tab character
+numbers = []
+for line in lines:
+    parts = line.split('\t')  # Split the line by the tab character
+    # Extract numbers after the tab character and convert them to float
+    numbers.extend([float(part) for part in parts[1:] if part.strip().isdigit()])
+
+# Convert the list of numbers to a numpy array
+numbers_array = np.array(numbers)
+
+#Printing the array
+print("The array is:")
+print(numbers_array)
+
+print("The maximum number is: ", np.max(numbers_array))
+print("The minimum number is: ", np.min(numbers_array))
+
+2. For the Numpy 1-D array as obtained in Q.1, sort the elements in ascending order.
+Soln:
+
+import numpy as np
+
+# Read the lines from the CSV file
+with open('book1.csv', 'r') as f:
+    lines = f.readlines()
+
+# Process each line to extract numbers after the tab character
+numbers = []
+for line in lines:
+    parts = line.split('\t')  # Split the line by the tab character
+    # Extract numbers after the tab character and convert them to float
+    numbers.extend([float(part) for part in parts[1:] if part.strip().isdigit()])
+
+# Convert the list of numbers to a numpy array
+numbers_array = np.array(numbers)
+
+#Printing the array
+print("The original array is:")
+print(numbers_array)
+
+#Printing sorted array
+sorted_array=np.sort(numbers_array)
+print("Sorted Array")
+print(sorted_array)
+
+3. For the sorted Numpy 1-D array as obtained in Q.2, reverse the array and print
+Soln:
+
+import numpy as np
+
+# Read the lines from the CSV file
+with open('book1.csv', 'r') as f:
+    lines = f.readlines()
+
+# Process each line to extract numbers after the tab character
+numbers = []
+for line in lines:
+    parts = line.split('\t')  # Split the line by the tab character
+    # Extract numbers after the tab character and convert them to float
+    numbers.extend([float(part) for part in parts[1:] if part.strip().isdigit()])
+
+# Convert the list of numbers to a numpy array
+numbers_array = np.array(numbers)
+
+#Printing the array
+print("The original array is:")
+print(numbers_array)
+
+#Sorting array
+sorted_array=np.sort(numbers_array)
+
+#Printing reverse sorted array
+print("Reversed Array")
+reversed_array=np.flip(sorted_array)
+print(reversed_array)
+
+4. Write a program to load three .csv files (Book1.csv, Book2.csv, and Book3.csv) as
+a list of Numpy 1-D arrays. Print the means of all arrays as a list.
+Soln:
+
+import numpy as np
+
+# Read the lines from the CSV file
+with open('book1.csv', 'r') as f:
+    lines = f.readlines()
+
+# Process each line to extract numbers after the tab character
+numbers = []
+for line in lines:
+    parts = line.split('\t')  # Split the line by the tab character
+    # Extract numbers after the tab character and convert them to float
+    numbers.extend([float(part) for part in parts[1:] if part.strip().isdigit()])
+
+# Convert the list of numbers to a numpy array
+numbers_array = np.array(numbers)
+
+# Read the lines from the CSV file
+with open('book2.csv', 'r') as f:
+    lines = f.readlines()
+
+# Convert the list of numbers to a numpy array
+#numbers1_array = np.array(numbers1)
+
+# Initialize an empty list
+numbers1 = []
+
+# Read the lines from the CSV file
+with open('book2.csv', 'r') as f:
+    # Process each line to extract numbers after the tab character
+    for line in f:
+        parts = line.strip().split('\t')  # Split the line by the tab character
+        # Extract numbers after the tab character and convert them to float
+        for part in parts[1:]:
+            try:
+                number = float(part)
+                numbers1.append(number)
+            except ValueError:
+                pass  # Ignore non-numeric values
+
+# Convert the list of numbers to a numpy array
+numbers1_array = np.array(numbers1)
+
+# Read the lines from the CSV file
+with open('book3.csv', 'r') as f:
+    lines = f.readlines()
+
+# Process each line to extract numbers after the tab character
+numbers2 = []
+for line in lines:
+    parts = line.split('\t')  # Split the line by the tab character
+    # Extract numbers after the tab character and convert them to float
+    numbers2.extend([np.float64(part) for part in parts[1:] if part.strip().isdigit()])
+
+# Convert the list of numbers to a numpy array
+numbers2_array = np.array(numbers2)
+
+array_list=[numbers_array, numbers1_array, numbers2_array]
+
+mean_list=[np.mean(numbers_array), np.mean(numbers1_array), np.mean(numbers2_array)]
+#Printing the list of means
+print("The list of means is:")
+print(mean_list)
+
+5. Write a program to read an image, store the image in NumPy 3-D array. For the image, consider
+a.PNG. Display the image. Let the image stored in the NumPy array be X.
+Soln:
+
+import cv2
+import numpy as np
+
+# Read an image
+image = cv2.imread('a.png')
+
+# Convert the image to a NumPy array
+X = np.array(image)
+
+#Displaying the coloured image
+cv2.imshow('Image', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+6. Write a program to convert a color image (say a.PNG) into a grescale image. Let the greysacle
+image stored in the Numpy 2-D array be X. Display the grayscale iamge on the screen
+Soln:
+
+import cv2
+import numpy as np
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+
+#Displaying the coloured image
+cv2.imshow('Image', image_gray)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+7. Let Y be the transpose matrix of X. Write a program to obtain Z = X×Y. 
+Soln:
+
+import cv2
+import numpy as np
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+Y = np.transpose(X)
+start_time=time.perf_counter()
+Z=np.matmul(X, Y)
+end_time=time.perf_counter()
+elapsed_time=end_time-start_time
+print("Elapsed time: ", elapsed_time, " seconds")
+print("The product of multiplication is:")
+print(Z)
+
+8. For the problem in Q. 7, write your program without using NumPy library. Compare the
+computation times doing the same with NumPy and basic programming in Python.
+Soln:
+
+import cv2
+import numpy as np
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+Y = np.transpose(X)
+array_shape=X.shape
+rows=array_shape[0]
+col=array_shape[1]
+Z=list(np.array[[0]*rows]*rows, dtype=np.float128)
+start_time=time.perf_counter()
+#Basic matrix multiplication in O(rows*rows*col) time without np.matmul()
+for i in range(rows):
+	for j in range(rows):
+		for k in range (col):
+			Z[i][j]+=X[i][k]+Y[k][j]
+end_time=time.perf_counter()
+elapsed_time=end_time-start_time
+print("Elapsed time: ", elapsed_time, " seconds")
+
+9. Plot the pixel intensity histogram of the grescale image stored in X
+Soln:
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+histogram = cv2.calcHist([X], [0], None, [256], [0, 256])
+
+# Plot the histogram
+plt.plot(histogram)
+plt.title('Pixel Intensity Histogram')
+plt.xlabel('Pixel Intensity')
+plt.ylabel('Frequency')
+plt.show()
+
+10. Create a black rectangle at the position [(40,100) top right, (70, 200) bottom left] in the
+grayscale image. Display the image.
+Soln:
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+x1, y1=40, 100
+x2, y2=70, 200
+cv2.rectangle(image_gray, (x1, y1), (x2, y2), color=0, thickness=-1)
+
+# Display the image
+cv2.imshow('Image with Rectangle', image_gray)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+11. Using the grayscale image stored in X, transform it into the binarized image with thresholds:
+[50, 70, 100, 150]. Let the binarized images are stored in Z50, Z70, Z100, and Z150,
+respectively
+Soln:
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read an image
+image = cv2.imread('a.png')
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Convert the image to a NumPy array
+X = np.array(image_gray)
+
+# Threshold values
+thresholds = [50, 70, 100, 150]
+
+_, Z50 = cv2.threshold(image_gray, thresholds[0], 255, cv2.THRESH_BINARY)
+_, Z70 = cv2.threshold(image_gray, thresholds[1], 255, cv2.THRESH_BINARY)
+_, Z100 = cv2.threshold(image_gray, thresholds[2], 255, cv2.THRESH_BINARY)
+_, Z150 = cv2.threshold(image_gray, thresholds[3], 255, cv2.THRESH_BINARY)
+
+cv2.imshow('Binarized Image 1:', Z50)
+cv2.imshow('Binarized Image 2:', Z70)
+cv2.imshow('Binarized Image 3:', Z100)
+cv2.imshow('Binarized Image 4:', Z150)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+12. Consider the color image stored in a.png. Create a filter of [[-1,-1,-1][0,0,0][1,1,1]], and
+multiply this filter to each pixel value in the image. Display the image after filtering.
+Soln:
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read an image
+image = cv2.imread('a.png')
+
+filter_kernel = np.array([[-1, -1, -1],
+                          [ 0,  0,  0],
+                          [ 1,  1,  1]])
+
+# Apply the filter using convolution
+filtered_image = cv2.filter2D(image, -1, filter_kernel)
+
+# Display the filtered image
+cv2.imshow('Filtered Image', filtered_image)
+
+# Wait for a key press and close all OpenCV windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
